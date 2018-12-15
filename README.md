@@ -1,4 +1,5 @@
-This program is a rewrite of acidjazz's code to make it work in 1.12.2 
+This program is a rewrite of acidjazz's code to make it work in 1.12.2
+link to the original: https://github.com/acidjazz/drmon 
 
 
 ![](examples/2.jpg)
