@@ -257,8 +257,8 @@ function update()
     end
     
     -- are we charging? open the floodgates
-    if ri.status == "charging" then
-      inputfluxgate.setSignalLowFlow(900000)
+    if ri.status == "warming_up" then
+      inputfluxgate.setSignalLowFlow(100000000)
       emergencyCharge = false
     end
 
@@ -266,11 +266,6 @@ function update()
     if emergencyTemp == true and ri.status == "stopping" and ri.temperature < safeTemperature then
       reactor.activateReactor()
       emergencyTemp = false
-    end
-
-    -- are we charged? lets activate
-    if ri.status == "charged" and activateOnCharged == 1 then
-      reactor.activateReactor()
     end
 
     -- Input gate regulation
