@@ -1,3 +1,5 @@
+This program is a rewrite of acidjazz's code to make it work in 1.12.2 
+
 
 ![](examples/2.jpg)
 > *status*: currently stable, writing documentation
