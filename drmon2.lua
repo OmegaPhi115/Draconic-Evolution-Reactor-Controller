@@ -1,6 +1,6 @@
 -- modifiable variables
-local reactorSide = "back"
-local fluxgateSide = "right"
+local reactorSide = "left"
+local fluxgateSide = "top"
 
 local targetStrength = 50
 local maxTemperature = 8000
@@ -175,7 +175,7 @@ function update()
     end
 
     for k, v in pairs (ri) do
-      print(k.. ": ".. v)
+      print(k.. ": ".. tostring(v))
     end
     print("Output Gate: ", fluxgate.getSignalLowFlow())
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
@@ -275,14 +275,29 @@ function update()
 
     -- are we on? regulate the input fludgate to our target field strength
     -- or set it to our saved setting since we are on manual
-    if ri.status == "online" then
+    if ri.status == "running" then
       if autoInputGate == 1 then 
-        fluxval = ri.fieldDrainRate / (1 - (targetStrength/100) )
-        print("Target Gate: ".. fluxval)
-        inputfluxgate.setSignalLowFlow(fluxval)
+		if fieldStrength < 50000000 then
+			fluxval = 100000000 -- Charge ! 
+			print("Target Gate: ".. fluxval)
+			inputfluxgate.setSignalLowFlow(fluxval)
+		else
+			inputfluxgate.setSignalLowFlow(fieldDrainRate - 1)
+		end
+		
       else
         inputfluxgate.setSignalLowFlow(curInputGate)
       end
+	  
+	  else
+		if ri.status == "stoping" then
+			if autoInputGate == 1 then
+				if fieldStrength < (lowestFieldPercent * 1000000) then
+					fluxval = (lowestFieldPercent * 1000000) - fieldStrength + 100000
+					inputfluxgate.setSignalLowFlow(fluxval)
+				end
+			end
+		end
     end
 
     -- safeguards
