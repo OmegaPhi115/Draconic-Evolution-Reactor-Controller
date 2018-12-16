@@ -210,10 +210,10 @@ function update()
     f.draw_text_lr(mon, 2, 9, 1, "Input Gate:", f.format_int(inputfluxgate.getSignalLowFlow()) .. " RF/t", colors.white, colors.blue, colors.black)
 
     if autoInputGate == 1 then
-      f.draw_text(mon, 14, 10, "AUTO", colors.white, colors.gray)
+      f.draw_text(mon, 14, 10, "AU", colors.white, colors.gray)
     else
-      f.draw_text(mon, 14, 10, "MANU", colors.white, colors.gray)
-      drawButtons(20)
+      f.draw_text(mon, 14, 10, "MA", colors.white, colors.gray)
+      drawButtons(10)
     end
 
     local satPercent
@@ -268,11 +268,6 @@ function update()
       emergencyTemp = false
     end
 
-    -- are we charged? lets activate
-    if ri.status == "charged" and activateOnCharged == 1 then
-      reactor.activateReactor()
-    end
-
     -- are we on? regulate the input fludgate to our target field strength
     -- or set it to our saved setting since we are on manual
     if ri.status == "running" then
@@ -306,10 +301,10 @@ function update()
     -- out of fuel, kill it
     if fuelPercent <= 10 then
       reactor.stopReactor()
-      action = "Fuel below 10%, refuel"
+      action = "Fuel below 10%, Need refuel"
     end
 
-    -- field strength is too dangerous, kill and it try and charge it before it blows
+    -- field strength is too low, kill and it try and charge it before it blows
     if fieldPercent <= lowestFieldPercent and ri.status == "online" then
       action = "Field Str < " ..lowestFieldPercent.."%"
       reactor.stopReactor()
