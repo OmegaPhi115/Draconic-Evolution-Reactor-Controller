@@ -1,5 +1,4 @@
---intall test: second try
---version: 0.1.4.1
+local version = "0.1.4.3"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -14,7 +13,6 @@ local activateOnCharged = 1
 -- please leave things untouched from here on
 os.loadAPI("lib/f")
 
-local version = "0.25"
 -- toggleable via the monitor, use our algorithm to achieve our target field strength or let the user tweak it
 local autoInputGate = 1
 local curInputGate = 222000
@@ -39,8 +37,6 @@ monitor = f.periphSearch("monitor")
 outputfluxgate = peripheral.wrap(outputfluxgateSide)
 inputfluxgate = f.periphSearch("flux_gate")
 reactor = peripheral.wrap(reactorSide)
-
-outputfluxgate.setSignalLowFlow(0)
 
 if monitor == null then
 	error("No valid monitor was found")
@@ -173,6 +169,7 @@ function update()
     ri = reactor.getReactorInfo()
 
     -- print out all the infos from .getReactorInfo() to term
+	print("Version: ", version)
 
     if ri == nil then
       error("reactor has an invalid setup")
@@ -279,7 +276,7 @@ function update()
     if ri.status == "running" then
       if autoInputGate == 1 then 
 		if ri.fieldStrength < 50000000 then
-			fluxval = (50000000 - (ri.fieldStrength + 5000000)) + ri.fieldDrainRate * 10  -- Charge ! 
+			fluxval = (50000000 - (ri.fieldStrength)) + ri.fieldDrainRate * 10  -- Charge ! 
 			print("Target Gate: ".. fluxval)
 			inputfluxgate.setSignalLowFlow(fluxval)
 		else
