@@ -1,6 +1,7 @@
+--intall test: do you see me ?
 -- modifiable variables
 local reactorSide = "left"
-local fluxgateSide = "top"
+local outputfluxgateSide = "top"
 
 local targetStrength = 50
 local maxTemperature = 8000
@@ -22,7 +23,7 @@ local mon, monitor, monX, monY
 
 -- peripherals
 local reactor
-local fluxgate
+local outputfluxgate
 local inputfluxgate
 
 -- reactor information
@@ -35,15 +36,15 @@ local emergencyTemp = false
 
 monitor = f.periphSearch("monitor")
 inputfluxgate = f.periphSearch("flux_gate")
-fluxgate = peripheral.wrap(fluxgateSide)
+outputfluxgate = peripheral.wrap(outputfluxgateSide)
 reactor = peripheral.wrap(reactorSide)
 
 if monitor == null then
 	error("No valid monitor was found")
 end
 
-if fluxgate == null then
-	error("No valid fluxgate was found")
+if outputfluxgate == null then
+	error("No valid outputfluxgate was found")
 end
 
 if reactor == null then
@@ -94,7 +95,7 @@ function buttons()
     -- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
     -- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
     if yPos == 8 then
-      local cFlow = fluxgate.getSignalLowFlow()
+      local cFlow = outputfluxgate.getSignalLowFlow()
       if xPos >= 2 and xPos <= 4 then
         cFlow = cFlow-1000
       elseif xPos >= 6 and xPos <= 9 then
@@ -108,7 +109,7 @@ function buttons()
       elseif xPos >= 25 and xPos <= 27 then
         cFlow = cFlow+1000
       end
-      fluxgate.setSignalLowFlow(cFlow)
+      outputfluxgate.setSignalLowFlow(cFlow)
     end
 
     -- input gate controls
@@ -177,7 +178,7 @@ function update()
     for k, v in pairs (ri) do
       print(k.. ": ".. tostring(v))
     end
-    print("Output Gate: ", fluxgate.getSignalLowFlow())
+    print("Output Gate: ", outputfluxgate.getSignalLowFlow())
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
 
     -- monitor output
@@ -202,7 +203,7 @@ function update()
     if ri.temperature >= 5000 and ri.temperature <= 6500 then tempColor = colors.orange end
     f.draw_text_lr(mon, 2, 6, 1, "Temperature:", f.format_int(ri.temperature) .. "C", colors.white, tempColor, colors.black)
 
-    f.draw_text_lr(mon, 2, 7, 1, "Output Gate:", f.format_int(fluxgate.getSignalLowFlow()) .. " RF/t", colors.white, colors.blue, colors.black)
+    f.draw_text_lr(mon, 2, 7, 1, "Output Gate:", f.format_int(outputfluxgate.getSignalLowFlow()) .. " RF/t", colors.white, colors.blue, colors.black)
 
     -- buttons
     drawButtons(8)
@@ -274,7 +275,7 @@ function update()
     -- or set it to our saved setting since we are on manual
     if ri.status == "running" then
       if autoInputGate == 1 then 
-		if fieldStrength < 5000000 then
+		if tonumber(fieldStrength) < 5000000 then
 			fluxval = 100000000 -- Charge ! 
 			print("Target Gate: ".. fluxval)
 			inputfluxgate.setSignalLowFlow(fluxval)
