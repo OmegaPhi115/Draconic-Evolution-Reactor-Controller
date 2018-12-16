@@ -178,8 +178,10 @@ function update()
       print(k.. ": ".. tostring(v))
     end
     print("Output Gate: ", fluxgate.getSignalLowFlow())
+	print("test!")
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
 	print(ri.status)
+	print("test!")
 
     -- monitor output
 
