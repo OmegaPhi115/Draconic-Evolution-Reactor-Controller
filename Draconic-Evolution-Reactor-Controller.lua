@@ -166,8 +166,6 @@ end
 
 
 function update()
-  local statusColor
-  local changesoclean
   while true do 
 	changesoclean = false
     ri = reactor.getReactorInfo()
@@ -185,6 +183,8 @@ function update()
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
 
     -- monitor output prep
+	local statusColor
+    local changesoclean
 
     statusColor = colors.red
 
