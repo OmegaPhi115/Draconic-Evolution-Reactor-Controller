@@ -40,12 +40,15 @@ inputfluxgate = f.periphSearch("flux_gate")
 outputfluxgate = peripheral.wrap(outputfluxgateSide)
 reactor = peripheral.wrap(reactorSide)
 
+print(inputfluxgate)
+print(1/0)
+
 if monitor == null then
 	error("No valid monitor was found")
 end
 
 if outputfluxgate == null then
-	error("No valid outputfluxgate was found")
+	error("No valid output fluxgate was found")
 end
 
 if reactor == null then
@@ -53,7 +56,7 @@ if reactor == null then
 end
 
 if inputfluxgate == null then
-	error("No valid flux gate was found")
+	error("No valid input flux gate was found")
 end
 
 monX, monY = monitor.getSize()
