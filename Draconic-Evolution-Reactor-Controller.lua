@@ -272,7 +272,7 @@ function update()
 
     -- are we on? regulate the input fludgate to our target field strength
     -- or set it to our saved setting since we are on manual
-    if ri.status == "running" then
+    if tostring(ri.status) == "running" then
       if autoInputGate == 1 then 
 		if fieldStrength < 5000000 then
 			fluxval = 100000000 -- Charge ! 
