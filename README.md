@@ -1,5 +1,5 @@
-This program is a rewrite of acidjazz's code to make it work in 1.12.2
-link to the original: https://github.com/acidjazz/drmon 
+*This program is a rewrite of acidjazz's code to make it work in 1.12.2
+*link to the original: https://github.com/acidjazz/drmon 
 
 
 ![](examples/2.jpg)
@@ -11,8 +11,6 @@ monitor and failsafe automation for your draconic reactor
 
 ### what is this
 this is a computercraft LUA script that monitors everything about a draconic reactor, with a couple features to help keep it from exploding
-NB: This is for Minecraft 1.7.10. You will need to edit references within the code for any version higher to reflect any changes made to Draconic Evolution past its 1.7.10 release.
-
 
 ### tutorial
 you can find a very well made youtube tutorial on how to set this up [here](https://www.youtube.com/watch?v=8rBhQP1xqEU) , thank you [The MindCrafters](https://www.youtube.com/channel/UCf2wEy4_BbYpAQcgvN26OaQ)
