@@ -278,12 +278,12 @@ function update()
     -- or set it to our saved setting since we are on manual
     if ri.status == "running" then
       if autoInputGate == 1 then 
-		if tonumber(fieldStrength) < 5000000 then
+		if ri.fieldStrength < 5000000 then
 			fluxval = 100000000 -- Charge ! 
 			print("Target Gate: ".. fluxval)
 			inputfluxgate.setSignalLowFlow(fluxval)
 		else
-			inputfluxgate.setSignalLowFlow(fieldDrainRate - 1)
+			inputfluxgate.setSignalLowFlow(ri.fieldDrainRate - 1)
 		end
 		
       else
@@ -293,8 +293,8 @@ function update()
 	  else
 		if ri.status == "stoping" then
 			if autoInputGate == 1 then
-				if fieldStrength < (lowestFieldPercent * 1000000) then
-					fluxval = (lowestFieldPercent * 1000000) - fieldStrength + 100000
+				if ri.fieldStrength < (lowestFieldPercent * 1000000) then
+					fluxval = (ri.lowestFieldPercent * 1000000) - ri.fieldStrength + 100000
 					inputfluxgate.setSignalLowFlow(fluxval)
 				end
 			end
