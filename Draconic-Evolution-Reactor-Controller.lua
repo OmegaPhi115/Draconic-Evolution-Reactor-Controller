@@ -166,7 +166,10 @@ end
 
 
 function update()
+  local statusColor
+  local changesoclean
   while true do 
+	changesoclean = false
     ri = reactor.getReactorInfo()
 
     -- print out all the infos from .getReactorInfo() to term
@@ -183,7 +186,6 @@ function update()
 
     -- monitor output prep
 
-    local statusColor
     statusColor = colors.red
 
     if ri.status == "online" or ri.status == "charged" then
@@ -285,7 +287,7 @@ function update()
     -- or set it to our saved setting since we are on manual
     if ri.status == "running" then
       if autoInputGate == 1 then 
-		if tonumber(fieldStrength) < 5000000 then
+		if ri.fieldStrength < 5000000 then
 			fluxval = 100000000 -- Charge ! 
 			print("Target Gate: ".. fluxval)
 			inputfluxgate.setSignalLowFlow(fluxval)
@@ -300,7 +302,7 @@ function update()
 	  else
 		if ri.status == "stoping" then
 			if autoInputGate == 1 then
-				if fieldStrength < (lowestFieldPercent * 1000000) then
+				if ri.fieldStrength < (lowestFieldPercent * 1000000) then
 					fluxval = (lowestFieldPercent * 1000000) - fieldStrength + 100000
 					inputfluxgate.setSignalLowFlow(fluxval)
 				end
