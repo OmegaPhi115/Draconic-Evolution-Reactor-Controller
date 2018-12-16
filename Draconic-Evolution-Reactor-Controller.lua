@@ -189,7 +189,7 @@ function update()
       statusColor = colors.green
     elseif ri.status == "offline" then
       statusColor = colors.gray
-    elseif ri.status == "charging" then
+    elseif ri.status == "warming_up" then
       statusColor = colors.orange
     end
 
@@ -272,7 +272,7 @@ function update()
 
     -- are we on? regulate the input fludgate to our target field strength
     -- or set it to our saved setting since we are on manual
-    if tostring(ri.status) == "running" then
+    if tostring(ri.status) or "" == "running" then
       if autoInputGate == 1 then 
 		if fieldStrength < 5000000 then
 			fluxval = 100000000 -- Charge ! 
@@ -287,7 +287,7 @@ function update()
       end
 	  
 	  else
-		if ri.status == "stoping" then
+		if ri.status == "cooling" then
 			if autoInputGate == 1 then
 				if fieldStrength < (lowestFieldPercent * 1000000) then
 					fluxval = (lowestFieldPercent * 1000000) - fieldStrength + 100000
