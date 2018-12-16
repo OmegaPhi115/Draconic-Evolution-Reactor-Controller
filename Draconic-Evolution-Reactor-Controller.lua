@@ -287,7 +287,7 @@ function update()
       end
 	  
 	  else
-		if ri.status == "cooling" then
+		if ri.status == "stoping" then
 			if autoInputGate == 1 then
 				if fieldStrength < (lowestFieldPercent * 1000000) then
 					fluxval = (lowestFieldPercent * 1000000) - fieldStrength + 100000
