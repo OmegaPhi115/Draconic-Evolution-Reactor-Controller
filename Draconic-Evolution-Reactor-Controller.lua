@@ -1,5 +1,5 @@
 --intall test: second try
---version: 0.1.3
+--version: 0.1.3.1
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -7,7 +7,7 @@ local outputfluxgateSide = "top"
 local targetStrength = 50
 local maxTemperature = 8000
 local safeTemperature = 3000
-local lowestFieldPercent = 15
+local lowestFieldPercent = 25
 
 local activateOnCharged = 1
 
@@ -294,7 +294,7 @@ function update()
 		if ri.status == "stopping" then
 			if autoInputGate == 1 then
 				if ri.fieldStrength < (lowestFieldPercent * 1000000) then
-					fluxval = (ri.lowestFieldPercent * 1000000) - ri.fieldStrength + 100000
+					fluxval = (lowestFieldPercent * 1000000) - ri.fieldStrength + 100000
 					inputfluxgate.setSignalLowFlow(fluxval)
 				end
 			end
