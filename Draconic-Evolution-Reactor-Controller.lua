@@ -40,6 +40,8 @@ outputfluxgate = peripheral.wrap(outputfluxgateSide)
 inputfluxgate = f.periphSearch("flux_gate")
 reactor = peripheral.wrap(reactorSide)
 
+outputfluxgate.setSignalLowFlow(0)
+
 if monitor == null then
 	error("No valid monitor was found")
 end
