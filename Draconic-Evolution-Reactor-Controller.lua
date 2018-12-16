@@ -1,5 +1,5 @@
 --intall test: second try
---version: 0.1.1
+--version: 0.1.2
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
