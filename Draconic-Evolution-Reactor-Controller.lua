@@ -1,4 +1,5 @@
---intall test: do you see me ?
+--intall test: second try
+--version: 0.1.1
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -95,21 +96,21 @@ function buttons()
     -- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
     -- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
     if yPos == 8 then
-      local cFlow = outputfluxgate.getSignalLowFlow()
+      local flowOutputfluxgate = outputfluxgate.getSignalLowFlow()
       if xPos >= 2 and xPos <= 4 then
-        cFlow = cFlow-1000
+        flowOutputfluxgate = flowOutputfluxgate-1000
       elseif xPos >= 6 and xPos <= 9 then
-        cFlow = cFlow-10000
+        flowOutputfluxgate = flowOutputfluxgate-10000
       elseif xPos >= 10 and xPos <= 12 then
-        cFlow = cFlow-100000
+        flowOutputfluxgate = flowOutputfluxgate-100000
       elseif xPos >= 17 and xPos <= 19 then
-        cFlow = cFlow+100000
+        flowOutputfluxgate = flowOutputfluxgate+100000
       elseif xPos >= 21 and xPos <= 23 then
-        cFlow = cFlow+10000
+        flowOutputfluxgate = flowOutputfluxgate+10000
       elseif xPos >= 25 and xPos <= 27 then
-        cFlow = cFlow+1000
+        flowOutputfluxgate = flowOutputfluxgate+1000
       end
-      outputfluxgate.setSignalLowFlow(cFlow)
+      outputfluxgate.setSignalLowFlow(flowOutputfluxgate)
     end
 
     -- input gate controls
