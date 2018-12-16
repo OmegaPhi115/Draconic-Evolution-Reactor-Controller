@@ -19,7 +19,7 @@ file1.close()
 startup = http.get(startupURL)
 startupFile = startup.readAll()
 
-fs.delete "startup"
+
 local file2 = fs.open("startup", "w")
 file2.write(startupFile)
 file2.close()
