@@ -36,12 +36,9 @@ local emergencyCharge = false
 local emergencyTemp = false
 
 monitor = f.periphSearch("monitor")
-inputfluxgate = f.periphSearch("flux_gate")
 outputfluxgate = peripheral.wrap(outputfluxgateSide)
+inputfluxgate = f.periphSearch("flux_gate")
 reactor = peripheral.wrap(reactorSide)
-
-print(inputfluxgate)
-print(1/0)
 
 if monitor == null then
 	error("No valid monitor was found")
