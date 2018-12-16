@@ -257,9 +257,11 @@ function update()
     end
     
     -- are we charging? open the floodgates
-    if ri.status == "warming_up" then
-      inputfluxgate.setSignalLowFlow(100000000)
-      emergencyCharge = false
+	if autoInputGate == 1 then
+		if ri.status == "warming_up" then
+			inputfluxgate.setSignalLowFlow(100000000)
+			emergencyCharge = false
+		end
     end
 
     -- are we stopping from a shutdown and our temp is better? activate
@@ -272,7 +274,7 @@ function update()
     -- or set it to our saved setting since we are on manual
     if ri.status == "running" then
       if autoInputGate == 1 then 
-		if fieldStrength < 50000000 then
+		if fieldStrength < 5000000 then
 			fluxval = 100000000 -- Charge ! 
 			print("Target Gate: ".. fluxval)
 			inputfluxgate.setSignalLowFlow(fluxval)
