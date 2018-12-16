@@ -1,5 +1,5 @@
 --intall test: second try
---version: 0.1.4
+--version: 0.1.4.1
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -279,7 +279,7 @@ function update()
     if ri.status == "running" then
       if autoInputGate == 1 then 
 		if ri.fieldStrength < 50000000 then
-			fluxval = 50000000 - (ri.fieldStrength + 5000000) -- Charge ! 
+			fluxval = (50000000 - (ri.fieldStrength + 5000000)) + ri.fieldDrainRate * 10  -- Charge ! 
 			print("Target Gate: ".. fluxval)
 			inputfluxgate.setSignalLowFlow(fluxval)
 		else
