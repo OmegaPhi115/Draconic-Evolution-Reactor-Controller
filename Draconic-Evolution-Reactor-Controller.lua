@@ -179,6 +179,7 @@ function update()
     end
     print("Output Gate: ", fluxgate.getSignalLowFlow())
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
+	print(ri.status)
 
     -- monitor output
 
