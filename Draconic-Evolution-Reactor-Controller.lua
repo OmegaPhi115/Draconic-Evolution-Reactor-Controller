@@ -167,9 +167,6 @@ end
 
 function update()
   while true do 
-
-    f.clear(mon)
-
     ri = reactor.getReactorInfo()
 
     -- print out all the infos from .getReactorInfo() to term
@@ -228,6 +225,7 @@ function update()
     if fuelPercent < 70 and fuelPercent > 30 then fuelColor = colors.orange end
 	
 	-- monitor output actual
+	f.clear(mon)
 	f.draw_text_lr(mon, 2, 2, 1, "Reactor Status:", string.upper(ri.status), colors.white, statusColor, colors.black)
 
     f.draw_text_lr(mon, 2, 4, 1, "Generation:", f.format_int(ri.generationRate) .. " RF/t", colors.white, colors.lime, colors.black)
