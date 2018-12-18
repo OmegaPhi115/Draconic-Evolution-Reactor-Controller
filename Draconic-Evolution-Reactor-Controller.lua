@@ -163,6 +163,9 @@ end
 
 function update()
   while true do 
+
+    f.clear(mon)
+
     ri = reactor.getReactorInfo()
 
     -- print out all the infos from .getReactorInfo() to term
@@ -274,7 +277,6 @@ function update()
       if autoInputGate == 1 then 
 		if ri.fieldStrength < 50000000 then
 			fluxval = (50000000 - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
-			print("Target Gate: ".. fluxval)
 			inputfluxgate.setSignalLowFlow(fluxval)
 		else
 			inputfluxgate.setSignalLowFlow(ri.fieldDrainRate - 1)
