@@ -1,4 +1,4 @@
-local version = "0.1.4.3"
+local version = "0.1.4.4"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -163,9 +163,6 @@ end
 
 function update()
   while true do 
-
-    f.clear(mon)
-
     ri = reactor.getReactorInfo()
 
     -- print out all the infos from .getReactorInfo() to term
@@ -186,7 +183,7 @@ function update()
     local statusColor
     statusColor = colors.red
 
-    if ri.status == "online" or ri.status == "charged" then
+    if ri.status == "running" then
       statusColor = colors.green
     elseif ri.status == "offline" then
       statusColor = colors.gray
@@ -276,7 +273,7 @@ function update()
     if ri.status == "running" then
       if autoInputGate == 1 then 
 		if ri.fieldStrength < 50000000 then
-			fluxval = (50000000 - (ri.fieldStrength)) + ri.fieldDrainRate * 10  -- Charge ! 
+			fluxval = (50000000 - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
 			print("Target Gate: ".. fluxval)
 			inputfluxgate.setSignalLowFlow(fluxval)
 		else

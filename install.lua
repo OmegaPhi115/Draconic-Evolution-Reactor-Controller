@@ -1,5 +1,5 @@
 --installation script
---
+--rhNbNbFE
 --
 
 local libURL = "https://raw.githubusercontent.com/OmegaPhi115/Draconic-Evolution-Reactor-Controller/master/lib/f.lua"
@@ -19,7 +19,7 @@ file1.close()
 startup = http.get(startupURL)
 startupFile = startup.readAll()
 
-fs.delete "startup"
 local file2 = fs.open("startup", "w")
 file2.write(startupFile)
 file2.close()
+os.reboot()
