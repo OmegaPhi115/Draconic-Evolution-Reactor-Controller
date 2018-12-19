@@ -154,9 +154,9 @@ function drawButtons(y)
   f.draw_text(mon, 6, y, "--", colors.white, colors.gray)
   f.draw_text(mon, 10, y, "---", colors.white, colors.gray)
 
-  f.draw_text(mon, 16, y, "+++", colors.white, colors.gray)
-  f.draw_text(mon, 21, y, "++", colors.white, colors.gray)
-  f.draw_text(mon, 25, y, "+", colors.white, colors.gray)
+  f.draw_text(mon, 17, y, "+++", colors.white, colors.gray)
+  f.draw_text(mon, 22, y, "++", colors.white, colors.gray)
+  f.draw_text(mon, 26, y, "+", colors.white, colors.gray)
 end
 
 
@@ -182,8 +182,8 @@ function update()
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
 
     -- monitor output
-	f.draw_text(mon, 1, 1, "v>", colors.white, colors.orange)
-	f.draw_text(mon, 3, 1, " Reactor Controler>>>>>>>>>>", colors.white, colors.green)
+	f.draw_text(mon, 1, 1, "V >", colors.white, colors.orange)
+	f.draw_text(mon, 4, 1, "Reactor Controler>>>>>>>>>>", colors.white, colors.green)
 
     local statusColor
     statusColor = colors.red
@@ -213,9 +213,9 @@ function update()
     f.draw_text_lr(mon, 2, 9, 1, "Input Gate:", f.format_int(inputfluxgate.getSignalLowFlow()) .. " RF/t", colors.white, colors.blue, colors.black)
 
     if autoInputGate == 1 then
-      f.draw_text(mon, 14, 10, "A", colors.white, colors.gray)
+      f.draw_text(mon, 14, 10, "AU", colors.white, colors.gray)
     else
-      f.draw_text(mon, 14, 10, "M", colors.white, colors.gray)
+      f.draw_text(mon, 14, 10, "MA", colors.white, colors.gray)
       drawButtons(10)
     end
 
