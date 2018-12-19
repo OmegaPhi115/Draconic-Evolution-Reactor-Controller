@@ -183,7 +183,7 @@ function update()
 
     -- monitor output
 	f.draw_text(mon, 1, 1, "v", colors.white, colors.red)
-	f.draw_text(mon, 1, 3, ">Reactor Controler>>>>>>>>>>>>>>", colors.white, colors.green)
+	f.draw_text(mon, 2, 1, ">Reactor Controler>>>>>>>>>>", colors.white, colors.green)
 
     local statusColor
     statusColor = colors.red
