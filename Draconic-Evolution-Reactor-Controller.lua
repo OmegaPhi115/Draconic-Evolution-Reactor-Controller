@@ -1,4 +1,4 @@
-local version = "0.9.2.2"
+local version = "0.9.2.4"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -106,6 +106,9 @@ function buttons()
       elseif xPos >= 25 and xPos <= 27 then
         flowOutputfluxgate = flowOutputfluxgate+1000
       end
+	  if flowOutputfluxgate < 0 then
+		flowOutputfluxgate = 0
+	  end
       outputfluxgate.setSignalLowFlow(flowOutputfluxgate)
     end
 
@@ -126,12 +129,15 @@ function buttons()
       elseif xPos >= 25 and xPos <= 27 then
         curInputGate = curInputGate+1000
       end
+	  if curInputGate < 0 then
+		curInputGate = 0
+	  end
       inputfluxgate.setSignalLowFlow(curInputGate)
       save_config()
     end
 
     -- input gate toggle
-    if yPos == 8 and ( xPos == 14 ) then
+    if yPos == 8 and ( xPos == 14 or xPos == 15) then
       if autoInputGate == 1 then
         autoInputGate = 0
       else
@@ -229,12 +235,8 @@ function update()
     fieldColor = colors.red
     if fieldPercent >= 50 then fieldColor = colors.green end
     if fieldPercent < 50 and fieldPercent > 30 then fieldColor = colors.orange end
-
-    if autoInputGate == 1 then 
-      f.draw_text_lr(mon, 2, 14, 1, "Field Strength T:" .. targetStrength, fieldPercent .. "%", colors.white, fieldColor, colors.black)
-    else
-      f.draw_text_lr(mon, 2, 14, 1, "Field Strength", fieldPercent .. "%", colors.white, fieldColor, colors.black)
-    end
+	
+	f.draw_text_lr(mon, 2, 14, 1, "Field Strength", fieldPercent .. "%", colors.white, fieldColor, colors.black)
     f.progress_bar(mon, 2, 15, mon.X-2, fieldPercent, 100, fieldColor, colors.gray)
 
     local fuelPercent, fuelColor
@@ -246,10 +248,10 @@ function update()
     if fuelPercent >= 70 then fuelColor = colors.green end
     if fuelPercent < 70 and fuelPercent > 30 then fuelColor = colors.orange end
 
-    f.draw_text_lr(mon, 2, 17, 1, "Fuel ", fuelPercent .. "%", colors.white, fuelColor, colors.black)
+    f.draw_text_lr(mon, 2, 17, 1, "Draconium ", fuelPercent .. "%", colors.white, fuelColor, colors.black)
     f.progress_bar(mon, 2, 18, mon.X-2, fuelPercent, 100, fuelColor, colors.gray)
 
-    f.draw_text_lr(mon, 2, 19, 1, "Action ", action, colors.gray, colors.gray, colors.black)
+    f.draw_text_lr(mon, 2, 19, 1, "Action: ", action, colors.gray, colors.gray, colors.black)
 
     -- actual reactor interaction
     --
@@ -274,19 +276,19 @@ function update()
     -- are we on? regulate the input fludgate to our target field strength
     -- or set it to our saved setting since we are on manual
     if ri.status == "running" then
-      if autoInputGate == 1 then 
-		if ri.fieldStrength < 50000000 then
-			fluxval = (50000000 - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
-			inputfluxgate.setSignalLowFlow(fluxval)
-		else
+        if autoInputGate == 1 then 
+		    if ri.fieldStrength < 50000000 then
+				fluxval = (50000000 - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
+				inputfluxgate.setSignalLowFlow(fluxval)
+			else
 			inputfluxgate.setSignalLowFlow(ri.fieldDrainRate - 1)
-		end
+			end
 		
-      else
-        inputfluxgate.setSignalLowFlow(curInputGate)
-      end
+		else
+			inputfluxgate.setSignalLowFlow(curInputGate)
+        end
 	  
-	  else
+	else
 		if ri.status == "stopping" then
 			if autoInputGate == 1 then
 				if ri.fieldStrength < ((lowestFieldPercent * 1000000) + 1000000) then
@@ -309,7 +311,7 @@ function update()
     end
 
     -- field strength is too low, kill and it try and charge it before it blows
-    if fieldPercent <= lowestFieldPercent and ri.status == "online" then
+    if fieldPercent <= lowestFieldPercent and ri.status == "running" then
       action = "Field Str < " ..lowestFieldPercent.."%"
       reactor.stopReactor()
       reactor.chargeReactor()
