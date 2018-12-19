@@ -1,14 +1,12 @@
-local version = "0.2"
+local version = "0.9.1"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
 
 local targetStrength = 50
 local maxTemperature = 8000
-local safeTemperature = 3000
+local safeTemperature = 7500
 local lowestFieldPercent = 25
-
-local activateOnCharged = 1
 
 -- please leave things untouched from here on
 os.loadAPI("lib/f")
@@ -70,7 +68,6 @@ end
 --read settings from file
 function load_config()
   sr = fs.open("config.txt", "r")
-  version = sr.readLine()
   autoInputGate = tonumber(sr.readLine())
   curInputGate = tonumber(sr.readLine())
   sr.close()
@@ -88,6 +85,7 @@ function buttons()
 
   while true do
     -- button handler
+	sleep(0) 
     event, side, xPos, yPos = os.pullEvent("monitor_touch")
 
     -- output gate controls
@@ -182,16 +180,16 @@ function update()
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
 
     -- monitor output
-	f.draw_text(mon, 1, 1, "V >", colors.white, colors.orange)
-	f.draw_text(mon, 4, 1, "Reactor Controler>>>>>>>>>>", colors.white, colors.green)
+	f.draw_text(mon, 1, 1, "O", colors.orange, colors.white)
+	f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>", colors.white, colors.green)
 
     local statusColor
     statusColor = colors.red
 
     if ri.status == "running" then
       statusColor = colors.green
-    elseif ri.status == "offline" then
-      statusColor = colors.gray
+    elseif ri.status == "cold" then
+      statusColor = colors.blue
     elseif ri.status == "warming_up" then
       statusColor = colors.orange
     end
@@ -268,7 +266,7 @@ function update()
     end
 
     -- are we stopping from a shutdown and our temp is better? activate
-    if emergencyTemp == true and ri.status == "stopping" and ri.temperature < safeTemperature then
+    if emergencyTemp == true and ri.status == "stopping" and ri.temperature < 4000 then
       reactor.activateReactor()
       emergencyTemp = false
     end
