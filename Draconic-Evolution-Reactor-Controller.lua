@@ -182,7 +182,7 @@ function update()
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
 
     -- monitor output
-	f.draw_text(mon, 1, 1, "v", colors.white, colors.red)
+	f.draw_text(mon, 1, 1, "v", colors.white, colors.orange)
 	f.draw_text(mon, 2, 1, ">Reactor Controler>>>>>>>>>>", colors.white, colors.green)
 
     local statusColor
