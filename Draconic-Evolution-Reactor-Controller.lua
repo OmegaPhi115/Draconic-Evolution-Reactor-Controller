@@ -1,4 +1,4 @@
-local version = "0.1.5"
+local version = "0.1.5.2"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
