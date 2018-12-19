@@ -1,4 +1,4 @@
-local version = "0.9.2.1"
+local version = "0.9.2.2"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -181,7 +181,7 @@ function update()
 
     -- monitor output
 	f.draw_text(mon, 1, 1, "O", colors.black, colors.white)
-	f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>", colors.white, colors.green)
+	f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>>", colors.white, colors.green)
 
     local statusColor
     statusColor = colors.red
