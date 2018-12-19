@@ -1,4 +1,4 @@
-local version = "0.9.2"
+local version = "0.9.2.1"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -91,7 +91,7 @@ function buttons()
     -- output gate controls
     -- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
     -- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
-    if yPos == 8 then
+    if yPos == 10 then
       local flowOutputfluxgate = outputfluxgate.getSignalLowFlow()
       if xPos >= 2 and xPos <= 4 then
         flowOutputfluxgate = flowOutputfluxgate-1000
@@ -112,7 +112,7 @@ function buttons()
     -- input gate controls
     -- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
     -- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
-    if yPos == 10 and autoInputGate == 0 and xPos ~= 14 and xPos ~= 15 then
+    if yPos == 8 and autoInputGate == 0 and xPos ~= 14 and xPos ~= 15 then
       if xPos >= 2 and xPos <= 4 then
         curInputGate = curInputGate-1000
       elseif xPos >= 6 and xPos <= 9 then
@@ -131,7 +131,7 @@ function buttons()
     end
 
     -- input gate toggle
-    if yPos == 10 and ( xPos == 14 ) then
+    if yPos == 8 and ( xPos == 14 ) then
       if autoInputGate == 1 then
         autoInputGate = 0
       else
@@ -206,15 +206,15 @@ function update()
     f.draw_text_lr(mon, 2, 9, 1, "Output Gate:", f.format_int(outputfluxgate.getSignalLowFlow()) .. " RF/t", colors.blue, colors.red, colors.black)
 
     -- buttons
-    drawButtons(8)
+    drawButtons(10)
 
     f.draw_text_lr(mon, 2, 7, 1, "Input Gate:", f.format_int(inputfluxgate.getSignalLowFlow()) .. " RF/t", colors.orange, colors.red, colors.black)
 
     if autoInputGate == 1 then
-      f.draw_text(mon, 14, 10, "AU", colors.white, colors.gray)
+      f.draw_text(mon, 14, 8, "AU", colors.white, colors.gray)
     else
-      f.draw_text(mon, 14, 10, "MA", colors.white, colors.gray)
-      drawButtons(10)
+      f.draw_text(mon, 14, 8, "MA", colors.white, colors.gray)
+      drawButtons(8)
     end
 
     local satPercent
