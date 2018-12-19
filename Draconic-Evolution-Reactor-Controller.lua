@@ -1,4 +1,4 @@
-local version = "0.9.1"
+local version = "0.9.2"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -167,10 +167,10 @@ function update()
     ri = reactor.getReactorInfo()
 
     -- print out all the infos from .getReactorInfo() to term
-	print("Version: ", version)
+	print("Current Version: ", version)
 
     if ri == nil then
-      error("reactor has an invalid setup")
+      error("Reactor has an invalid setup")
     end
 
     for k, v in pairs (ri) do
@@ -180,7 +180,7 @@ function update()
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
 
     -- monitor output
-	f.draw_text(mon, 1, 1, "O", colors.orange, colors.white)
+	f.draw_text(mon, 1, 1, "O", colors.black, colors.white)
 	f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>", colors.white, colors.green)
 
     local statusColor
@@ -203,12 +203,12 @@ function update()
     if ri.temperature >= 5000 and ri.temperature <= 6500 then tempColor = colors.orange end
     f.draw_text_lr(mon, 2, 6, 1, "Temperature:", f.format_int(ri.temperature) .. "C", colors.white, tempColor, colors.black)
 
-    f.draw_text_lr(mon, 2, 7, 1, "Output Gate:", f.format_int(outputfluxgate.getSignalLowFlow()) .. " RF/t", colors.white, colors.blue, colors.black)
+    f.draw_text_lr(mon, 2, 9, 1, "Output Gate:", f.format_int(outputfluxgate.getSignalLowFlow()) .. " RF/t", colors.blue, colors.red, colors.black)
 
     -- buttons
     drawButtons(8)
 
-    f.draw_text_lr(mon, 2, 9, 1, "Input Gate:", f.format_int(inputfluxgate.getSignalLowFlow()) .. " RF/t", colors.white, colors.blue, colors.black)
+    f.draw_text_lr(mon, 2, 7, 1, "Input Gate:", f.format_int(inputfluxgate.getSignalLowFlow()) .. " RF/t", colors.orange, colors.red, colors.black)
 
     if autoInputGate == 1 then
       f.draw_text(mon, 14, 10, "AU", colors.white, colors.gray)
