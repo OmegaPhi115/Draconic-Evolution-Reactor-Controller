@@ -1,4 +1,4 @@
-local version = "0.1.5.2"
+local version = "0.2"
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -133,7 +133,7 @@ function buttons()
     end
 
     -- input gate toggle
-    if yPos == 10 and ( xPos == 14 or xPos == 15) then
+    if yPos == 10 and ( xPos == 14 ) then
       if autoInputGate == 1 then
         autoInputGate = 0
       else
@@ -213,9 +213,9 @@ function update()
     f.draw_text_lr(mon, 2, 9, 1, "Input Gate:", f.format_int(inputfluxgate.getSignalLowFlow()) .. " RF/t", colors.white, colors.blue, colors.black)
 
     if autoInputGate == 1 then
-      f.draw_text(mon, 15, 10, "A", colors.white, colors.gray)
+      f.draw_text(mon, 14, 10, "A", colors.white, colors.gray)
     else
-      f.draw_text(mon, 15, 10, "M", colors.white, colors.gray)
+      f.draw_text(mon, 14, 10, "M", colors.white, colors.gray)
       drawButtons(10)
     end
 
