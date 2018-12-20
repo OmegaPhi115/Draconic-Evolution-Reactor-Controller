@@ -51,9 +51,6 @@ this is a computercraft LUA script that monitors everything about a draconic rea
 > install
 ```
 * modify `startup` if you wish to configure/alter any variables mentioned in the feature list, you'll find them at the top of the file
-```
-> startup
-```
 * you should see stats in your term, and on your monitor
 
 ### upgrading to the latest version
