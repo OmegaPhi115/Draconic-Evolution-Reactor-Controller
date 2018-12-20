@@ -3,19 +3,16 @@
 
 
 ![](examples/2.jpg)
-> *status*: currently stable, writing documentation
-
-
 # Draconic Evolution Reactor Controller
-monitor and failsafe automation for your draconic reactor
-This program is a rewrite of acidjazz's code to make it work in 1.12.2
-link to the original: https://github.com/acidjazz/drmon 
+* Monitor and failsafe automation for your draconic reactor
+* This program is a rewrite of acidjazz's code to make it work in 1.12.2
+* link to the original: https://github.com/acidjazz/drmon 
 
 ### what is this
 this is a computercraft LUA script that monitors everything about a draconic reactor, with a couple features to help keep it from exploding
 
 ### tutorial
-This tutorial is a bit old but it can work [here](https://www.youtube.com/watch?v=8rBhQP1xqEU) , thank you [The MindCrafters](https://www.youtube.com/channel/UCf2wEy4_BbYpAQcgvN26OaQ)
+[This tutorial](https://www.youtube.com/watch?v=8rBhQP1xqEU) is a bit old but it can work, thank you [The MindCrafters](https://www.youtube.com/channel/UCf2wEy4_BbYpAQcgvN26OaQ)
 
 ### features
 * uses a 3x3 advanced computer touchscreen monitor to interact with your reactor
