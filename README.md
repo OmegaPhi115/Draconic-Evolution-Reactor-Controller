@@ -6,14 +6,16 @@
 > *status*: currently stable, writing documentation
 
 
-# drmon
+# Draconic Evolution Reactor Controller
 monitor and failsafe automation for your draconic reactor
+This program is a rewrite of acidjazz's code to make it work in 1.12.2
+link to the original: https://github.com/acidjazz/drmon 
 
 ### what is this
 this is a computercraft LUA script that monitors everything about a draconic reactor, with a couple features to help keep it from exploding
 
 ### tutorial
-you can find a very well made youtube tutorial on how to set this up [here](https://www.youtube.com/watch?v=8rBhQP1xqEU) , thank you [The MindCrafters](https://www.youtube.com/channel/UCf2wEy4_BbYpAQcgvN26OaQ)
+This tutorial is a bit old but it can work [here](https://www.youtube.com/watch?v=8rBhQP1xqEU) , thank you [The MindCrafters](https://www.youtube.com/channel/UCf2wEy4_BbYpAQcgvN26OaQ)
 
 ### features
 * uses a 3x3 advanced computer touchscreen monitor to interact with your reactor
@@ -31,24 +33,24 @@ you can find a very well made youtube tutorial on how to set this up [here](http
   * +/-100k, 10k, and 1k increments
 
 ### requirements
-* one fully setup draconic reactor with fuel
+* one fully setup draconic reactor (and fuel)
 * 1 advanced computer
 * 9 advanced monitors
 * 3 wired modems, wireless will not work
-* a bunch of network cable
+* a bunch of network cables
 
 ### installation
 * your reactor output flux gate must be setup so that one side of it and one of your stabilizers touches a side of the advanced computer
-* by default, flux gate should touch the right side, stabilizer should touch the back of the computer
+* by default, flux gate should touch the top side, stabilizer on the left of the computer
   * if you want to use different sides you need to modify `startup` after you have installed this and specify the sides
 * connect a modem to your input flux gate (the one connected to your reactor energy injector)
-* connect a modem to your advanced computer
-* setup yoru monitors to be a 3x3 and connect a modem to anywhere but the front
+* connect a modem to your advanced computer (at the botom side)
+* setup your monitors to be a 3x3 and connect a modem to anywhere but the front
 * run network cable to all 3 modems
 * install this code via running the install script using these commands :
 
 ```
-> pastebin get Ls1Wg3QQ install
+> pastebin get rhNbNbFE install
 > install
 ```
 * modify `startup` if you wish to configure/alter any variables mentioned in the feature list, you'll find them at the top of the file
@@ -58,13 +60,9 @@ you can find a very well made youtube tutorial on how to set this up [here](http
 * you should see stats in your term, and on your monitor
 
 ### upgrading to the latest version
-* right click your computer
 * hold ctrl+t until you get a `>`
 
 ```
 > install
 > startup
 ```
-
-### known issues
-* there is a problem with **skyfactory 2.5** and **pastebin**, see workarounds [here](https://github.com/acidjazz/drmon/issues/9#issuecomment-277910288)
