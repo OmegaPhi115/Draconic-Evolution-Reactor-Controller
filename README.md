@@ -1,12 +1,9 @@
-*This program is a rewrite of acidjazz's code to make it work in 1.12.2
-*link to the original: https://github.com/acidjazz/drmon 
-
-
-![](examples/2.jpg)
 # Draconic Evolution Reactor Controller
 * Monitor and failsafe automation for your draconic reactor
 * This program is a rewrite of acidjazz's code to make it work in 1.12.2
 * link to the original: https://github.com/acidjazz/drmon 
+
+![](examples/2.jpg)
 
 ### what is this
 this is a computercraft LUA script that monitors everything about a draconic reactor, with a couple features to help keep it from exploding
