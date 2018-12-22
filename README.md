@@ -9,7 +9,7 @@
 This is a computercraft (opencomputers might work but they are not tested) LUA script that monitors everything about a draconic reactor, with a couple features to help keep it from exploding
 
 ### tutorial
-[This tutorial](https://www.youtube.com/watch?v=8rBhQP1xqEU) is a bit old but it can work, thank you [The MindCrafters](https://www.youtube.com/channel/UCf2wEy4_BbYpAQcgvN26OaQ)
+Not done yet
 
 ### features
 * Uses a 3x3 advanced computer touchscreen monitor to interact with your reactor
