@@ -9,7 +9,7 @@ local lowestFieldPercent = 25
 
 -- please leave things untouched from here on
 os.loadAPI("lib/f")
-local version = "1.1.2"
+local version = "1.1.3"
 
 -- toggleable via the monitor, use our algorithm to achieve our target field strength or let the user tweak it
 local autoInputGate = 1
@@ -18,6 +18,7 @@ local curInputGate = 222000
 -- monitor 
 local mon, monitor, monX, monY
 local menu = ""
+local reload = true
 
 -- peripherals
 local reactor
@@ -101,8 +102,8 @@ function buttons()
 			save_config()
 		end
 	end
-	if menu == "reactor_control" then
-		if yPos = 1 then
+	if menu == "main" then
+		if yPos == 1 then
 			menu = "reactor_control"
 			save_config()
 		end
@@ -185,8 +186,12 @@ end
 
 function update()
   while true do 
-
-    f.clear(mon)
+	if reload == true then
+		f.clear(mon)
+	else
+		term.clear()
+        term.setCursorPos(1,1)
+	end
 
     ri = reactor.getReactorInfo()
 
@@ -245,10 +250,12 @@ function update()
 	
 	-- print to monitor
 	if menu == "main" then
+		reload = false
 		f.draw_text(mon, 1, 1, ">", colors.white, colors.lime)
 		f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
 	end
 	if menu == "reactor_control" then
+		reload = true
 		f.draw_text(mon, 1, 1, "V", colors.white, colors.lime)
 		f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
 
