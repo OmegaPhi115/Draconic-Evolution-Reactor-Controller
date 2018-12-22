@@ -245,7 +245,7 @@ function update()
 	
 	-- print to monitor
 	if menu == "main" then
-		f.draw_text(mon, 1, 1, "V", colors.white, colors.lime)
+		f.draw_text(mon, 1, 1, ">", colors.white, colors.lime)
 		f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
 	end
 	if menu == "reactor_control" then
