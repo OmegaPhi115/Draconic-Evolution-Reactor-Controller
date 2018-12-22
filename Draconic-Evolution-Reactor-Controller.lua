@@ -238,8 +238,8 @@ function update()
 	
 	-- print to monitor
 	if menu == "reactor_control" then
-
-		f.draw_text(mon, 1, 1, "V Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
+		f.draw_text(mon, 1, 1, "V", colors.white, colors.lime)
+		f.draw_text(mon, 1, 1, " Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
 
 		f.draw_text_lr(mon, 2, 2, 1, "Reactor Status:", string.upper(ri.status), colors.white, statusColor, colors.black)
 
