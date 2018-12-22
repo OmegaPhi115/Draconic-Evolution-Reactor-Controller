@@ -153,7 +153,7 @@ function buttons()
 end
 
 function drawButtons(y)
-
+  -- draw + - buttons
   -- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
   -- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
 
@@ -187,20 +187,20 @@ function update()
     print("Input Gate: ", inputfluxgate.getSignalLowFlow())
 
     -- monitor output
+	-- data
+	local statusColor
+	statusColor = colors.red
+	if ri.status == "running" then
+		statusColor = colors.green
+	elseif ri.status == "cold" then
+		statusColor = colors.blue
+	elseif ri.status == "warming_up" then
+		statusColor = colors.orange
+	end
+	-- print to monitor
 	if menu == "reactor_control" then
 		--f.draw_text(mon, 1, 1, "O", colors.black, colors.white)
 		f.draw_text(mon, 1, 1, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
-
-		local statusColor
-		statusColor = colors.red
-
-		if ri.status == "running" then
-		  statusColor = colors.green
-		elseif ri.status == "cold" then
-		  statusColor = colors.blue
-		elseif ri.status == "warming_up" then
-		  statusColor = colors.orange
-		end
 
 		f.draw_text_lr(mon, 2, 2, 1, "Reactor Status:", string.upper(ri.status), colors.white, statusColor, colors.black)
 
