@@ -188,6 +188,7 @@ function update()
 
     -- monitor output
 	-- data
+
 		--status
 	local statusColor
 	statusColor = colors.red
@@ -196,6 +197,8 @@ function update()
 	elseif ri.status == "cold" then
 		statusColor = colors.blue
 	elseif ri.status == "warming_up" then
+		statusColor = colors.orange
+	elseif ri.status == "stopping" then
 		statusColor = colors.orange
 	end
 	
