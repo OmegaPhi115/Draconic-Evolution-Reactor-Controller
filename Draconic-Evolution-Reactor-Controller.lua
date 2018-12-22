@@ -90,9 +90,16 @@ menu = "reactor_control"
 function buttons()
 
   while true do
-  -- button handler
-  sleep(0)
-  event, side, xPos, yPos = os.pullEvent("monitor_touch")
+	-- button handler
+	sleep(0)
+	event, side, xPos, yPos = os.pullEvent("monitor_touch")
+	--if menu == "main" then
+	--end
+	if menu ~= "main" then
+		if yPos == 1 and xPos == 1 then
+			menu == "main"
+		end
+	end
 	if menu == "reactor_control" then
 		-- output gate controls
 		-- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
@@ -178,6 +185,7 @@ function update()
 
     -- print out all the infos from .getReactorInfo() to term
 	print("Current Version: ", version)
+	print("Current Menu: ", menu)
 
     if ri == nil then
       error("Reactor has an invalid setup")
@@ -230,8 +238,8 @@ function update()
 	
 	-- print to monitor
 	if menu == "reactor_control" then
-		--f.draw_text(mon, 1, 1, "O", colors.black, colors.white)
-		f.draw_text(mon, 1, 1, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
+
+		f.draw_text(mon, 1, 1, "V Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
 
 		f.draw_text_lr(mon, 2, 2, 1, "Reactor Status:", string.upper(ri.status), colors.white, statusColor, colors.black)
 
