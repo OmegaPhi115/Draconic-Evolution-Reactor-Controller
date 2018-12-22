@@ -60,10 +60,11 @@ mon.monitor,mon.X, mon.Y = monitor, monX, monY
 --write settings to config file
 function save_config()
   sw = fs.open("config.txt", "w")   
-  sw.writeLine(version)
   sw.writeLine(autoInputGate)
   sw.writeLine(curInputGate)
   sw.writeLine(menu)
+  -- useless but keep it
+  sw.writeLine(version)
   sw.close()
 end
 
