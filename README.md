@@ -5,13 +5,13 @@
 
 ![](examples/Reactor_1.png)
 
-### what is this
+### What is this
 This is a computercraft (opencomputers might work but they are not tested) LUA script that monitors everything about a draconic reactor, with a couple features to help keep it from exploding
 
-### tutorial
+### Tutorial
 Not done yet
 
-### features
+### Features
 * Uses a 3x3 advanced computer touchscreen monitor to interact with your reactor
 * Automated regulation of the input gate for the targeted field strength of 50%
   * adjustable
