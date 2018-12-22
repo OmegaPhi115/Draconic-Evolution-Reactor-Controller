@@ -188,6 +188,7 @@ function update()
 
     -- monitor output
 	-- data
+		--status
 	local statusColor
 	statusColor = colors.red
 	if ri.status == "running" then
@@ -198,6 +199,29 @@ function update()
 		statusColor = colors.orange
 	end
 	
+		--fuel
+	local fuelPercent, fuelColor
+	fuelPercent = 100 - math.ceil(ri.fuelConversion / ri.maxFuelConversion * 10000)*.01
+	fuelColor = colors.red
+	if fuelPercent >= 70 then fuelColor = colors.green end
+	if fuelPercent < 70 and fuelPercent > 30 then fuelColor = colors.orange end
+	
+		--temperature
+	local tempColor = colors.red
+	if ri.temperature <= 5000 then tempColor = colors.green end
+	if ri.temperature >= 5000 and ri.temperature <= 6500 then tempColor = colors.orange end
+	
+		--saturation
+	local satPercent
+	satPercent = math.ceil(ri.energySaturation / ri.maxEnergySaturation * 10000)*.01
+	
+		--field
+	local fieldPercent, fieldColor
+	fieldPercent = math.ceil(ri.fieldStrength / ri.maxFieldStrength * 10000)*.01
+	fieldColor = colors.red
+	if fieldPercent >= 50 then fieldColor = colors.green end
+	if fieldPercent < 50 and fieldPercent > 30 then fieldColor = colors.orange end
+	
 	-- print to monitor
 	if menu == "reactor_control" then
 		--f.draw_text(mon, 1, 1, "O", colors.black, colors.white)
@@ -207,9 +231,6 @@ function update()
 
 		f.draw_text_lr(mon, 2, 4, 1, "Generation:", f.format_int(ri.generationRate) .. " RF/t", colors.white, colors.lime, colors.black)
 
-		local tempColor = colors.red
-		if ri.temperature <= 5000 then tempColor = colors.green end
-		if ri.temperature >= 5000 and ri.temperature <= 6500 then tempColor = colors.orange end
 		f.draw_text_lr(mon, 2, 6, 1, "Temperature:", f.format_int(ri.temperature) .. "C", colors.white, tempColor, colors.black)
 
 		f.draw_text_lr(mon, 2, 9, 1, "Output Gate:", f.format_int(outputfluxgate.getSignalLowFlow()) .. " RF/t", colors.blue, colors.red, colors.black)
@@ -226,30 +247,11 @@ function update()
 		  drawButtons(8)
 		end
 
-		local satPercent
-		satPercent = math.ceil(ri.energySaturation / ri.maxEnergySaturation * 10000)*.01
-
 		f.draw_text_lr(mon, 2, 11, 1, "Energy Saturation", satPercent .. "%", colors.white, colors.white, colors.black)
 		f.progress_bar(mon, 2, 12, mon.X-2, satPercent, 100, colors.blue, colors.gray)
-
-		local fieldPercent, fieldColor
-		fieldPercent = math.ceil(ri.fieldStrength / ri.maxFieldStrength * 10000)*.01
-
-		fieldColor = colors.red
-		if fieldPercent >= 50 then fieldColor = colors.green end
-		if fieldPercent < 50 and fieldPercent > 30 then fieldColor = colors.orange end
 		
 		f.draw_text_lr(mon, 2, 14, 1, "Field Strength", fieldPercent .. "%", colors.white, fieldColor, colors.black)
 		f.progress_bar(mon, 2, 15, mon.X-2, fieldPercent, 100, fieldColor, colors.gray)
-
-		local fuelPercent, fuelColor
-
-		fuelPercent = 100 - math.ceil(ri.fuelConversion / ri.maxFuelConversion * 10000)*.01
-
-		fuelColor = colors.red
-
-		if fuelPercent >= 70 then fuelColor = colors.green end
-		if fuelPercent < 70 and fuelPercent > 30 then fuelColor = colors.orange end
 
 		f.draw_text_lr(mon, 2, 17, 1, "Draconium ", fuelPercent .. "%", colors.white, fuelColor, colors.black)
 		f.progress_bar(mon, 2, 18, mon.X-2, fuelPercent, 100, fuelColor, colors.gray)
