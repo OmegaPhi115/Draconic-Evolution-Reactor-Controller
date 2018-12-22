@@ -17,6 +17,7 @@ local curInputGate = 222000
 
 -- monitor 
 local mon, monitor, monX, monY
+local menu = ""
 
 -- peripherals
 local reactor
@@ -81,71 +82,73 @@ else
   load_config()
 end
 
+menu = "reactor_control"
+
 function buttons()
 
   while true do
-    -- button handler
-	sleep(0) 
-    event, side, xPos, yPos = os.pullEvent("monitor_touch")
+  -- button handler
+  sleep(0)
+  event, side, xPos, yPos = os.pullEvent("monitor_touch")
+	if menu == "reactor_control" then
+		-- output gate controls
+		-- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
+		-- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
+		if yPos == 10 then
+		  local flowOutputfluxgate = outputfluxgate.getSignalLowFlow()
+		  if xPos >= 2 and xPos <= 4 then
+			flowOutputfluxgate = flowOutputfluxgate-1000
+		  elseif xPos >= 6 and xPos <= 9 then
+			flowOutputfluxgate = flowOutputfluxgate-10000
+		  elseif xPos >= 10 and xPos <= 12 then
+			flowOutputfluxgate = flowOutputfluxgate-100000
+		  elseif xPos >= 17 and xPos <= 19 then
+			flowOutputfluxgate = flowOutputfluxgate+100000
+		  elseif xPos >= 21 and xPos <= 23 then
+			flowOutputfluxgate = flowOutputfluxgate+10000
+		  elseif xPos >= 25 and xPos <= 27 then
+			flowOutputfluxgate = flowOutputfluxgate+1000
+		  end
+		  if flowOutputfluxgate < 0 then
+			flowOutputfluxgate = 0
+		  end
+		  outputfluxgate.setSignalLowFlow(flowOutputfluxgate)
+		end
 
-    -- output gate controls
-    -- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
-    -- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
-    if yPos == 10 then
-      local flowOutputfluxgate = outputfluxgate.getSignalLowFlow()
-      if xPos >= 2 and xPos <= 4 then
-        flowOutputfluxgate = flowOutputfluxgate-1000
-      elseif xPos >= 6 and xPos <= 9 then
-        flowOutputfluxgate = flowOutputfluxgate-10000
-      elseif xPos >= 10 and xPos <= 12 then
-        flowOutputfluxgate = flowOutputfluxgate-100000
-      elseif xPos >= 17 and xPos <= 19 then
-        flowOutputfluxgate = flowOutputfluxgate+100000
-      elseif xPos >= 21 and xPos <= 23 then
-        flowOutputfluxgate = flowOutputfluxgate+10000
-      elseif xPos >= 25 and xPos <= 27 then
-        flowOutputfluxgate = flowOutputfluxgate+1000
-      end
-	  if flowOutputfluxgate < 0 then
-		flowOutputfluxgate = 0
-	  end
-      outputfluxgate.setSignalLowFlow(flowOutputfluxgate)
-    end
+		-- input gate controls
+		-- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
+		-- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
+		if yPos == 8 and autoInputGate == 0 and xPos ~= 14 and xPos ~= 15 then
+		  if xPos >= 2 and xPos <= 4 then
+			curInputGate = curInputGate-1000
+		  elseif xPos >= 6 and xPos <= 9 then
+			curInputGate = curInputGate-10000
+		  elseif xPos >= 10 and xPos <= 12 then
+			curInputGate = curInputGate-100000
+		  elseif xPos >= 17 and xPos <= 19 then
+			curInputGate = curInputGate+100000
+		  elseif xPos >= 21 and xPos <= 23 then
+			curInputGate = curInputGate+10000
+		  elseif xPos >= 25 and xPos <= 27 then
+			curInputGate = curInputGate+1000
+		  end
+		  if curInputGate < 0 then
+			curInputGate = 0
+		  end
+		  inputfluxgate.setSignalLowFlow(curInputGate)
+		  save_config()
+		end
 
-    -- input gate controls
-    -- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
-    -- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
-    if yPos == 8 and autoInputGate == 0 and xPos ~= 14 and xPos ~= 15 then
-      if xPos >= 2 and xPos <= 4 then
-        curInputGate = curInputGate-1000
-      elseif xPos >= 6 and xPos <= 9 then
-        curInputGate = curInputGate-10000
-      elseif xPos >= 10 and xPos <= 12 then
-        curInputGate = curInputGate-100000
-      elseif xPos >= 17 and xPos <= 19 then
-        curInputGate = curInputGate+100000
-      elseif xPos >= 21 and xPos <= 23 then
-        curInputGate = curInputGate+10000
-      elseif xPos >= 25 and xPos <= 27 then
-        curInputGate = curInputGate+1000
-      end
-	  if curInputGate < 0 then
-		curInputGate = 0
-	  end
-      inputfluxgate.setSignalLowFlow(curInputGate)
-      save_config()
-    end
-
-    -- input gate toggle
-    if yPos == 8 and ( xPos == 14 or xPos == 15) then
-      if autoInputGate == 1 then
-        autoInputGate = 0
-      else
-        autoInputGate = 1
-      end
-      save_config()
-    end
-
+		-- input gate toggle
+		if yPos == 8 and ( xPos == 14 or xPos == 15) then
+		  if autoInputGate == 1 then
+			autoInputGate = 0
+		  else
+			autoInputGate = 1
+		  end
+		  save_config()
+		end
+	end
   end
 end
 
