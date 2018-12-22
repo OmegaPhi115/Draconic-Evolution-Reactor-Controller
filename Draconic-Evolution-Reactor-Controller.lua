@@ -1,3 +1,4 @@
+-- test
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
