@@ -1,5 +1,5 @@
 --installation script
---rhNbNbFE
+--iLCARWDW
 --Version 1.0
 
 local libURL = "https://raw.githubusercontent.com/OmegaPhi115/Draconic-Evolution-Reactor-Controller/2.0/lib/f.lua"
