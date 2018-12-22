@@ -9,7 +9,7 @@ local lowestFieldPercent = 25
 
 -- please leave things untouched from here on
 os.loadAPI("lib/f")
-local version = "1.1.1"
+local version = "1.1.2"
 
 -- toggleable via the monitor, use our algorithm to achieve our target field strength or let the user tweak it
 local autoInputGate = 1
@@ -98,6 +98,13 @@ function buttons()
 	if menu ~= "main" then
 		if yPos == 1 and xPos == 1 then
 			menu = "main"
+			save_config()
+		end
+	end
+	if menu == "reactor_control" then
+		if yPos = 1 then
+			menu = "reactor_control"
+			save_config()
 		end
 	end
 	if menu == "reactor_control" then
@@ -237,6 +244,10 @@ function update()
 	if fieldPercent < 50 and fieldPercent > 30 then fieldColor = colors.orange end
 	
 	-- print to monitor
+	if menu == "main" then
+		f.draw_text(mon, 1, 1, "V", colors.white, colors.lime)
+		f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
+	end
 	if menu == "reactor_control" then
 		f.draw_text(mon, 1, 1, "V", colors.white, colors.lime)
 		f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
