@@ -2,10 +2,11 @@
 local reactorSide = "left"
 local outputfluxgateSide = "top"
 
-local targetStrength = 50
+local targetFieldStrengthPercent = 50
 local maxTemperature = 8000
 local safeTemperature = 7500
 local lowestFieldPercent = 25
+local targetSaturationPercent = 50
 
 -- please leave things untouched from here on
 os.loadAPI("lib/f")
@@ -277,8 +278,8 @@ function update()
     -- or set it to our saved setting since we are on manual
     if ri.status == "running" then
         if autoInputGate == 1 then 
-		    if ri.fieldStrength < 50000000 then
-				fluxval = (50000000 - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
+		    if ri.fieldStrength < (targetFieldStrengthPercent * 1000000) then
+				fluxval = ((targetFieldStrengthPercent * 1000000) - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
 				inputfluxgate.setSignalLowFlow(fluxval)
 			else
 			inputfluxgate.setSignalLowFlow(ri.fieldDrainRate - 1)
@@ -289,21 +290,24 @@ function update()
         end
 	  
 	else
-		if ri.status == "stopping" then
-			if autoInputGate == 1 then
-				if ri.fieldStrength < ((lowestFieldPercent * 1000000) + 1000000) then
-					fluxval = ((lowestFieldPercent * 1000000) + 1000000) - ri.fieldStrength + 100000
-					inputfluxgate.setSignalLowFlow(fluxval)
-				else
-				    inputfluxgate.setSignalLowFlow(0)
-				end
-			end
-		end
+
     end
 
     -- safeguards
     --
-    
+
+	-- Stopping ? if auto mode on give power to not blow
+	if ri.status == "stopping" then
+		if autoInputGate == 1 then
+			if ri.fieldStrength < ((lowestFieldPercent * 1000000) + 1000000) then
+				fluxval = ((lowestFieldPercent * 1000000) + 1000000) - ri.fieldStrength + 100000
+				inputfluxgate.setSignalLowFlow(fluxval)
+			else
+				inputfluxgate.setSignalLowFlow(0)
+			end
+		end
+	end
+		
     -- out of fuel, kill it
     if fuelPercent <= 10 then
       reactor.stopReactor()
