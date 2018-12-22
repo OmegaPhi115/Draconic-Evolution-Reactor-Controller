@@ -197,6 +197,7 @@ function update()
 	elseif ri.status == "warming_up" then
 		statusColor = colors.orange
 	end
+	
 	-- print to monitor
 	if menu == "reactor_control" then
 		--f.draw_text(mon, 1, 1, "O", colors.black, colors.white)
