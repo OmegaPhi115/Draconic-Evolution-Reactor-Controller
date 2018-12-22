@@ -1,4 +1,3 @@
--- test
 -- modifiable variables
 local reactorSide = "left"
 local outputfluxgateSide = "top"
@@ -10,7 +9,7 @@ local lowestFieldPercent = 25
 
 -- please leave things untouched from here on
 os.loadAPI("lib/f")
-local version = "1.0"
+local version = "1.1.0"
 
 -- toggleable via the monitor, use our algorithm to achieve our target field strength or let the user tweak it
 local autoInputGate = 1
@@ -64,6 +63,7 @@ function save_config()
   sw.writeLine(version)
   sw.writeLine(autoInputGate)
   sw.writeLine(curInputGate)
+  sw.writeLine(menu)
   sw.close()
 end
 
@@ -72,6 +72,7 @@ function load_config()
   sr = fs.open("config.txt", "r")
   autoInputGate = tonumber(sr.readLine())
   curInputGate = tonumber(sr.readLine())
+  menu = sr.readLine()
   sr.close()
 end
 
