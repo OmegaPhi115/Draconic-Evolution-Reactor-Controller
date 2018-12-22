@@ -101,14 +101,12 @@ function buttons()
 			menu = "main"
 			save_config()
 		end
-	end
-	if menu == "main" then
+	elseif menu == "main" then
 		if yPos == 1 then
 			menu = "reactor_control"
 			save_config()
 		end
-	end
-	if menu == "reactor_control" then
+	elseif menu == "reactor_control" then
 		-- output gate controls
 		-- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
 		-- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
