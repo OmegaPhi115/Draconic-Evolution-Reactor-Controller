@@ -55,7 +55,6 @@ Not done yet
 
 ```
 > install
-> startup
 ```
 
 ### Warnings
