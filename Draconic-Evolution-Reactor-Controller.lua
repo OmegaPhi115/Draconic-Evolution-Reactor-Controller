@@ -97,7 +97,7 @@ function buttons()
 	--end
 	if menu ~= "main" then
 		if yPos == 1 and xPos == 1 then
-			menu == "main"
+			menu = "main"
 		end
 	end
 	if menu == "reactor_control" then
