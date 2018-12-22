@@ -41,17 +41,17 @@ if monitor == null then
 	error("No valid monitor was found")
 end
 
-if outputfluxgate == null then
-	error("No valid output fluxgate was found")
-end
+--if outputfluxgate == null then
+--	error("No valid output fluxgate was found")
+--end
 
 if reactor == null then
 	error("No valid reactor was found")
 end
 
-if inputfluxgate == null then
-	error("No valid input flux gate was found")
-end
+--if inputfluxgate == null then
+--	error("No valid input flux gate was found")
+--end
 
 monX, monY = monitor.getSize()
 mon = {}
