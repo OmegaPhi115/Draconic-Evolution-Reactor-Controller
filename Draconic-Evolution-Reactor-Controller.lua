@@ -198,7 +198,7 @@ function update()
 		statusColor = colors.blue
 	elseif ri.status == "warming_up" then
 		statusColor = colors.orange
-	elseif ri.status == "stopping" then
+	elseif ri.status == "Stopping" then
 		statusColor = colors.orange
 	end
 	
