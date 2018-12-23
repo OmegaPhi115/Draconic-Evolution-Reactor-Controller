@@ -277,8 +277,8 @@ function update()
     -- or set it to our saved setting since we are on manual
     if ri.status == "running" then
         if autoInputGate == 1 then 
-		    if ri.fieldStrength < 50000000 then
-				fluxval = (50000000 - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
+		    if ri.fieldStrength < (targetFieldStrengthPercent * 1000000) then
+				fluxval = ((targetFieldStrengthPercent * 1000000) - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
 				inputfluxgate.setSignalLowFlow(fluxval)
 			else
 			inputfluxgate.setSignalLowFlow(ri.fieldDrainRate - 1)
