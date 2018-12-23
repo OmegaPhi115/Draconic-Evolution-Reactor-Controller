@@ -9,7 +9,7 @@ local lowestFieldPercent = 25
 
 -- please leave things untouched from here on
 os.loadAPI("lib/f")
-local version = "1.1.3"
+local version = "1.1.4"
 
 -- toggleable via the monitor, use our algorithm to achieve our target field strength or let the user tweak it
 local autoInputGate = 1
