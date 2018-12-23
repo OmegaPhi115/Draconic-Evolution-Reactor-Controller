@@ -101,12 +101,16 @@ function buttons()
 			menu = "main"
 			save_config()
 		end
-	elseif menu == "main" then
-		if yPos == 1 then
+	end
+	
+	if menu == "main" then
+		if yPos == 2 then
 			menu = "reactor_control"
 			save_config()
 		end
-	elseif menu == "reactor_control" then
+	end
+	
+	if menu == "reactor_control" then
 		-- output gate controls
 		-- 2-4 = -1000, 6-9 = -10000, 10-12,8 = -100000
 		-- 17-19 = +1000, 21-23 = +10000, 25-27 = +100000
@@ -249,8 +253,9 @@ function update()
 	-- print to monitor
 	if menu == "main" then
 		reload = false
-		f.draw_text(mon, 1, 1, ">", colors.white, colors.lime)
-		f.draw_text(mon, 2, 1, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
+		f.draw_text(mon, 1, 2, "     Reactor Controler", colors.white, colors.black)
+		f.draw_text(mon, 1, 2, ">", colors.white, colors.lime)
+		f.draw_text(mon, 2, 2, "Reactor Controler>>>>>>>>>>>>", colors.white, colors.green)
 	end
 	if menu == "reactor_control" then
 		reload = true
