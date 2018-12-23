@@ -58,4 +58,4 @@ Not done yet
 
 ### Warnings
 * There can have bugs so please report them in the issue tab above
-* Also try to put your reactor in a RF Tools dimension or realy far away and make backups (mod like aroma backups) for prevent damage if an explosion occured
+* Also try to put your reactor in a RF Tools dimension or realy far away and make backups (mod like aroma backups) for prevent damage in case of an explosion
