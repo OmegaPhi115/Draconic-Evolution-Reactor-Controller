@@ -4,14 +4,14 @@
 
 ![](examples/Reactor_1.png)
 
-### What is this
+### What is this ?
 This is a computercraft (opencomputers might work but they are not tested) LUA script that monitors everything about a draconic reactor, with a couple features to help keep it from exploding
 
 
-### Tutorial
+### Tutorial:
 Not done yet
 
-### Features
+### Features:
 * Uses a 3x3 advanced computer touchscreen monitor to interact with your reactor
 * Automated regulation of the input gate for the targeted field strength of 50%
   * adjustable
@@ -25,14 +25,14 @@ Not done yet
   
 ![](examples/Screen.png)
 
-### Requirements
+### Requirements:
 * one fully setup draconic reactor (and fuel, obviously)
 * 1 advanced computer
 * 9 advanced monitors
 * 3 wired modems, wireless will not work
 * a bunch of network cables
 
-### Installation
+### Installation:
 * Your reactor output flux gate must be setup so that one side of it and one of your stabilizers touches a side of the advanced computer
 * By default, flux gate should touch the top side, stabilizer on the left of the computer
   * If you want to use different sides you need to modify `startup` after you have installed this and specify the sides
@@ -47,7 +47,7 @@ Not done yet
 > install
 ```
 * Modify `startup` if you wish to configure/alter any variables mentioned in the feature list, you'll find them at the top of the file
-* You should see stats in your term, and on your monitor
+* You should see stats in your terminal, and on your monitor
 
 ### Upgrading to the latest version
 * Hold ctrl+t until you get a `>`
@@ -58,4 +58,4 @@ Not done yet
 
 ### Warnings
 * There can have bugs so please report them in the issue tab above
-* Also try to put your reactor in a RF Tools dimension or realy far away and make backups (mod like aroma backups) for prevent damage in case of an explosion
+* Also try to put your reactor in a RF Tools dimension or realy far away and make backups with mods like aroma backups to prevent damage in case of an explosion
