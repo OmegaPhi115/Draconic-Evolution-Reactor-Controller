@@ -1,12 +1,12 @@
 local version = "1.0"
 -- modifiable variables
-local reactorSide = "left"
-local outputfluxgateSide = "top"
+local reactorSide = "back" -- select from // back / top / left / right / bottom // depending on which side the "Reactor Stabilizier is at from the computer
+local outputfluxgateSide = "right" -- select from back / top / left / right / bottom // depending on which side the "Flux Gate" is at from the computer
 
-local targetStrength = 50
-local maxTemperature = 8000
-local safeTemperature = 7500
-local lowestFieldPercent = 25
+local targetFieldStrengthPercent = 50 -- selects a number to run the generator at ~50 is ideal (select 50.10 if you dont want it to go into orange)
+local maxTemperature = 8000 -- Maximum temperature before shutdown
+local safeTemperature = 7500 -- Maximum temperature until which the generator will run at
+local lowestFieldPercent = 25 -- If field goes below this number it will attempt to fix itself by putting maximum amount of power in
 
 -- please leave things untouched from here on
 os.loadAPI("lib/f")
@@ -278,7 +278,7 @@ function update()
     if ri.status == "running" then
         if autoInputGate == 1 then 
 		    if ri.fieldStrength < (targetFieldStrengthPercent * 1000000) then
-				fluxval = ((targetFieldStrengthPercent * 1000000) - ri.fieldStrength) + ri.fieldDrainRate * 10  -- Charge ! 
+				fluxval = ((targetFieldStrengthPercent * 1000000) - ri.fieldStrength) + ri.fieldDrainRate + 10  -- Charge ! 
 				inputfluxgate.setSignalLowFlow(fluxval)
 			else
 			inputfluxgate.setSignalLowFlow(ri.fieldDrainRate - 1)
